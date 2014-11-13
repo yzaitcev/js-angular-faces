@@ -1,0 +1,68 @@
+<h1>Add a New Model <i class="loading" ng-hide="oPostOptions.$resolved && sFormState != 'sending'"></i></h1>
+
+<form name="oForm" ng-submit="fnSubmit()" ng-show="oPostOptions.$resolved" role="form" novalidate>
+    <div ng-class="{'form-group': true, 'has-error': oForm.sLabel.$invalid && oForm.sLabel.$dirty}">
+        <label class="control-label">Model name: *</label>
+        <input ng-model="oFace.label" name="sLabel" type="text" class="form-control" maxlength="255" required>
+    </div>
+    
+    <div class="form-group">
+        <label class="control-label">Model type:</label>
+        <select ng-model="oFace.origin" ng-options="oOrigin.value as oOrigin.label for oOrigin in oPostOptions.origin.choices" name="iOrigin" class="form-control">
+            <option value="">Choose origin...</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <table class="table table-bordered">
+            <tr>
+                <th>Platform &amp; Size</th>
+                <th>Upload logo (.PNG) file</th>
+                <th>Reference Template</th>
+            </tr>
+            <tr>
+                <td><label class="control-label">Mobile: Thumbnail</label></td>
+                <td>
+                    <p>Image Size: XXX x XXX (.jpg)</p>
+                    <input mos-file-model="oFace.img_thumbnail" type="file">
+                </td>
+                <td>TBD</td>
+            </tr>
+            <tr>
+                <td><label class="control-label">Mobile: Tablet and Retina Display</label></td>
+                <td>
+                    <p>Image Size: XXX x XXX (.jpg)</p>
+                    <input mos-file-model="oFace.img_mobile_large" type="file">
+                </td>
+                <td>TBD</td>
+            </tr>
+            <tr>
+                <td><label class="control-label">Mobile: iPhone &amp; Android Phone version</label></td>
+                <td>
+                    <p>Image Size: XXX x XXX (.jpg)</p>
+                    <input mos-file-model="oFace.img_mobile_small" type="file">
+                </td>
+                <td>TBD</td>
+            </tr>
+            <tr>
+                <td><label class="control-label">Online: Thumbnail</label></td>
+                <td>
+                    <p>Image Size: XXX x XXX (.jpg)</p>
+                    <input mos-file-model="oFace.img_online_thumbnail" type="file">
+                </td>
+                <td>TBD</td>
+            </tr>
+            <tr>
+                <td><label class="control-label">Online: Large image</label></td>
+                <td>
+                    <p>Image Size: XXX x XXX (.jpg)</p>
+                    <input mos-file-model="oFace.img_online_large" type="file">
+                </td>
+                <td>TBD</td>
+            </tr>
+        </table>
+    </div>
+
+    <a class="btn btn-default" href="#/faces/{{sProjectId}}">&lsaquo; Back</a>
+    <input ng-disabled="oForm.$pristine || oForm.$invalid || 'sending' === sFormState" type="submit" class="btn btn-primary" value="Save"/>
+</form>

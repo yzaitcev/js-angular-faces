@@ -1,0 +1,43 @@
+<h1>Model Selection: {{oProject.id_code}} <i class="loading" ng-hide="oaFaces.active.$resolved && sFormState != 'sending'"></i></h1>
+
+<p>Please select and drag the models you'd like to include in your application. You may drag to re-order the models.</p>
+
+<div class="faces-grids">
+    
+    <p><strong>{{oaFaces.active.length}} Models Selected <a ng-click="fnClearSelection()" class="btn btn-default btn-xs text-right pull-right"><span class="glyphicon glyphicon-remove-circle"></span> Clear Selection</a></strong></p>
+    <div class="faces-grid active-grid">
+        <ul ui-sortable="{tolerance: 'pointer'}" ng-model="oaFaces.active">
+            <li ng-repeat="oFace in oaFaces.active track by $index">
+                <span class="thumbnail">
+                    <img ng-src="{{oFace.img_thumbnail}}" alt="{{oFace.label}}" title="{{oFace.label}}"/>
+                    <span class="actions">
+                        <a href="#/faces/{{oProject.id_code}}/edit/{{oFace.id}}" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a ng-click="fnSelect(oFace)" href="javascript:void(0);" title="Unselect"><span class="glyphicon glyphicon-log-out"></span></a>
+                    </span>
+                </span>
+            </li>
+        </ul>
+    </div>
+
+    <hr/>
+    
+    <p><strong>Available Models: {{ oaFaces.all.length }} of {{ oPaginator.iCount }} are loaded</strong></p>
+    <div class="faces-grid all-grid" mos-infnite-scroll="fnLoadMoreFaces()">
+        <ul ng-model="oaFaces.all">
+            <li ng-repeat="oFace in oaFaces.all" ng-class="{selected: fnIsSelected(oFace)}" ng-click="fnSelect(oFace)">
+                <span class="thumbnail">
+                    <img ng-src="{{oFace.img_thumbnail}}" alt="{{oFace.label}}" title="{{oFace.label}}"/>
+                    <span class="actions">
+                        <a href="#/faces/{{oProject.id_code}}/edit/{{oFace.id}}" ng-click="$event.stopPropagation()" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
+                    </span>
+                </span>
+            </li>
+        </ul>
+        <p class="text-center">
+            <button ng-click="fnLoadMoreFaces()" ng-show="oBtnLoadMore.visible" ng-disabled="oBtnLoadMore.disabled" ng-bind="oBtnLoadMore.text" type="button" class="btn btn-primary"></button>
+        </p>
+    </div>
+</div>
+<p><a class="btn btn-primary pull-right" href="#/faces/{{oProject.id_code}}/add">Add new model</a></p>
+<p><a ng-click="fnSave()" ng-disabled="'sending' === sFormState" class="btn btn-primary pull-left" href="javascript:void(0);">Save</a></p>
+
